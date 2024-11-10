@@ -11,7 +11,7 @@ SEEDBOT is a bot built for the SeedCoin telegram bot, designed to help users ear
 - Logging and error tracking
 - Configurable via a `requirements.txt` for easy setup
 
-## Worm Types and Support
+## Worm Types
 
 The following table lists the supported worm types and their corresponding support status:
 
@@ -24,7 +24,7 @@ The following table lists the supported worm types and their corresponding suppo
 | Legendary  | Not yet   |
 | Mythic     | Not yet   |
 
-## Egg Types and Support
+## Egg Types
 
 The following table lists the supported egg types and their corresponding support status:
 
