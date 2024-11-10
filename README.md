@@ -10,11 +10,9 @@ Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMl
 
 ## Features
 
-- Automatic worm trading for profit
-- Interaction with bird and worm attributes
+- Automatic worm, egg trading for profit
 - Uses async operations to handle game requests
 - Logging and error tracking
-- Configurable via a `requirements.txt` for easy setup
 
 ## Worm Types
 
