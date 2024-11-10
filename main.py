@@ -16,7 +16,7 @@ def display_logo():
     print('\n')
     # Display the GitHub link
     print(f"{Fore.YELLOW}GitHub: {Fore.GREEN}https://github.com/Ma1rwan")
-
+    print(f"{Fore.YELLOW}Join us on Telegram: {Fore.BLUE}https://t.me/+3ozlUUBMlSo2OGY0")
     # Add a pause for effect
     time.sleep(2)
 
