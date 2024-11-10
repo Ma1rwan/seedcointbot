@@ -3,7 +3,7 @@ from pyrogram import Client
 from pyrogram.raw.functions.messages import RequestAppWebView
 from pyrogram.raw.types import InputBotAppShortName
 from urllib.parse import unquote
-from seedbot.bot.logger import Logger
+from bot.logger import Logger
 
 
 logger = Logger()

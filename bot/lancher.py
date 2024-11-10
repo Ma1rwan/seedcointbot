@@ -1,7 +1,7 @@
 import nest_asyncio
 from pyrogram import Client
-from seedbot.bot.logger import Logger
-from seedbot.bot.tapper import Tapper
+from bot.logger import Logger
+from bot.tapper import Tapper
 import threading
 import keyboard
 import time
