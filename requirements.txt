@@ -1,0 +1,6 @@
+colorama
+pyrogram
+nest_asyncio
+aiohttp
+keyboard
+requests
