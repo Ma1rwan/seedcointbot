@@ -7,6 +7,14 @@ For updates, support, and community discussions, join us on Telegram!
 
 Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMlSo2OGY0)
 
+## Warning
+
+```python
+print(f"{Fore.RED}Warning: {Fore.YELLOW}The more accounts you use, the higher your profit will be.")
+print(f"{Fore.RED}However, you must use at least 3 accounts for optimal performance.")
+print(f"{Fore.RED}Only use this bot on alternative accounts, not on your main account.")
+print(f"{Fore.RED}By using this bot, you take full responsibility for its use and any associated risks.")
+
 
 ## Features
 
