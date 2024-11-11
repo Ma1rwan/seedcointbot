@@ -20,7 +20,7 @@ class Tapper:
 
     async def get_tg_web_data(self, proxy: str | None) -> str:
         # Use the ref ID directly
-        ref_ = '1306499778_b=859105'
+        ref_ = 'https://t.me/seed_coin_bot/app?startapp=1306499778'
         try:
             ref__ = ref_.split('=')[1]
         except IndexError:
