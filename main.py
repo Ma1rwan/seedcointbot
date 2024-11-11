@@ -24,6 +24,10 @@ def run_selected_module():
     display_logo()
     while True:
         # Display options to the user
+        print(
+        f"{Fore.YELLOW}Note: {Fore.GREEN}To ensure the bot works efficiently, you need to include at least 3 accounts.")
+        print(f"{Fore.YELLOW}The more accounts you add, the more profit the bot will generate overall!")
+
         print("\nChoose an option:")
         print("1. Create Session.")
         print("2. Launch bot.")
