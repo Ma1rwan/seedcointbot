@@ -77,8 +77,10 @@ To set up the project on your local machine, follow these steps:
    ```bash
     pip install -r requirements.txt
 3. **Put your API_ID and API_HASH in config file**:
+   How to get API_ID and API_HASH ?
+   Visit this link: [https://my.telegram.org]([https://t.me/+3ozlUUBMlSo2OGY0](https://my.telegram.org/auth))
 
-4. **Execute the following command**:
+5. **Execute the following command**:
    ```bash
     python main.py
 
