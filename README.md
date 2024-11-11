@@ -51,6 +51,15 @@ The following table lists the supported egg types and their corresponding suppor
 | Mythic     | Not yet   |
 
 
+## Overview of the Script
+
+![Image 1](image1.jpg)
+*Overview Image 1*
+
+![Image 2](image2.jpg)
+*Overview Image 2*
+
+
 ## Installation
 
 To set up the project on your local machine, follow these steps:
