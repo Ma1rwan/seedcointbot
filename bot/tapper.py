@@ -54,8 +54,6 @@ class Tapper:
 
             auth_url = web_view.url
             tg_web_data = unquote(auth_url.split('tgWebAppData=')[1].split('&tgWebAppVersion')[0])
-            print(tg_web_data)
-
             return tg_web_data
 
         except Exception as e:
