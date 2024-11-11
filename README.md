@@ -76,9 +76,12 @@ To set up the project on your local machine, follow these steps:
 3. **Install the dependencies**:
    ```bash
     pip install -r requirements.txt
-3. **Put your API_ID and API_HASH in config file**:
+4. **Put your API_ID and API_HASH in config file**:
+
 How to get API_ID and API_HASH ?
-Visit this link: [https://t.me/+3ozlUUBMlSo2OGY0]([[https://t.me/+3ozlUUBMlSo2OGY0](https://my.telegram.org/auth](https://t.me/+3ozlUUBMlSo2OGY0)))
+
+Visit this link: [https://t.me/+3ozlUUBMlSo2OGY0]([https://t.me/+3ozlUUBMlSo2OGY0](https://my.telegram.org/auth](https://t.me/+3ozlUUBMlSo2OGY0))
+
 5. **Execute the following command**:
    ```bash
     python main.py
