@@ -202,7 +202,7 @@ def launcher():
             raise
         except aiohttp.ClientError as e:
             if 'Bad Request' not in str(e):
-                logger.error(session_name, f"Error fetching market data for {worm_type}:")
+                logger.error(session_name, f"Error fetching market data for {worm_type}: {e}")
 
             return "skip"
         except asyncio.TimeoutError:
