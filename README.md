@@ -16,7 +16,8 @@ Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMl
 
 Please proceed with caution and ensure you follow these guidelines to avoid any issues.
 
-[![Watch the Video]([https://img.youtube.com/vi/YourVideoID/0.jpg](https://i9.ytimg.com/vi_webp/Czd7MgxpSR4/mqdefault.webp?v=6731aa5a&sqp=CKDByLkG&rs=AOn4CLDB9pLcVVWbwv88iCdZWB422Pz_yg))]([https://www.youtube.com/watch?v=YourVideoID](https://www.youtube.com/watch?v=Czd7MgxpSR4))
+[![Watch the Video](i9.ytimg.com/vi_webp/Czd7MgxpSR4/mqdefault.webp?v=6731aa5a&sqp=CKDByLkG&rs=AOn4CLDB9pLcVVWbwv88iCdZWB422Pz_yg)](https://www.youtube.com/watch?v=YourVideoID)
+
 
 
 ## Features
