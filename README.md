@@ -9,11 +9,13 @@ Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMl
 
 ## Warning
 
-```python
-print(f"{Fore.RED}Warning: {Fore.YELLOW}The more accounts you use, the higher your profit will be.")
-print(f"{Fore.RED}However, you must use at least 3 accounts for optimal performance.")
-print(f"{Fore.RED}Only use this bot on alternative accounts, not on your main account.")
-print(f"{Fore.RED}By using this bot, you take full responsibility for its use and any associated risks.")
+**Important:**
+- The more accounts you use, the higher your profit will be. It is recommended to use at least **3 accounts** for optimal performance.
+- **Use this bot only on alternative accounts.** Using it on your main account could result in issues or unintended consequences.
+- **By using this bot, you take full responsibility** for its use and any associated risks. We are not responsible for any consequences that may arise from using the bot.
+
+Please proceed with caution and ensure you follow these guidelines to avoid any issues.
+
 
 
 ## Features
