@@ -19,14 +19,16 @@ class Tapper:
         self.logger = logger
 
     async def get_tg_web_data(self, proxy: str | None) -> str:
-        # Use the ref ID directly
+        # This is my referral id to join with if you don't have an account
+        # This is the least way to support me
+        # If you don't you can change it to yours or leave it blank
         ref_ = 'https://t.me/seed_coin_bot/app?startapp=1306499778'
         try:
             ref__ = ref_.split('=')[1]
         except IndexError:
             ref__ = "1306499778"
 
-        actual = ref__  # Use the ref ID directly
+        actual = ref__
 
         # Set up proxy if provided
         if proxy:

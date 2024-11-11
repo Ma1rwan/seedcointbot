@@ -105,7 +105,7 @@ def launcher():
             raise
         except aiohttp.ClientError as e:
             if "Internal Server Error" not in str(e) and "Bad Request" not in str(e):
-                logger.error(session_name, f"Error buying {worm_type} worm.")
+                logger.error(session_name, f"Error buying {worm_type} worm. {e}")
 
             return None
 
@@ -154,7 +154,7 @@ def launcher():
         except KeyboardInterrupt:
             raise
         except aiohttp.ClientError as e:
-            logger.error(session_name, f"Error during selling {worm_type} worm:")
+            logger.error(session_name, f"Error during selling {worm_type} worm: {e}")
 
             return None
 
