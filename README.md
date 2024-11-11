@@ -80,7 +80,7 @@ To set up the project on your local machine, follow these steps:
 
 How to get API_ID and API_HASH ?
 
-Visit this link: [https://t.me/+3ozlUUBMlSo2OGY0]([https://t.me/+3ozlUUBMlSo2OGY0](https://my.telegram.org/auth](https://t.me/+3ozlUUBMlSo2OGY0))
+Visit this link: [https://my.telegram.org](https://my.telegram.org/auth)
 
 5. **Execute the following command**:
    ```bash
