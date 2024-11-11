@@ -4,7 +4,8 @@ from pyrogram.raw.functions.messages import RequestAppWebView
 from pyrogram.raw.types import InputBotAppShortName
 from urllib.parse import unquote
 from bot.logger import Logger
-
+from pyrogram.errors import Unauthorized, UserDeactivated, AuthKeyUnregistered, FloodWait
+import asyncio
 
 logger = Logger()
 
@@ -18,16 +19,28 @@ class Tapper:
         self.logger = logger
 
     async def get_tg_web_data(self, proxy: str | None) -> str:
+        # Use the ref ID directly
+        ref_ = '1306499778_b=859105'
         try:
-            if proxy:
-                proxy_dict = {'scheme': 'http', 'hostname': proxy, 'port': 8080}
-                self.tg_client.proxy = proxy_dict
-            else:
-                self.tg_client.proxy = None
+            ref__ = ref_.split('=')[1]
+        except IndexError:
+            ref__ = "1306499778"
 
+        actual = ref__  # Use the ref ID directly
+
+        # Set up proxy if provided
+        if proxy:
+            proxy_dict = {'scheme': 'http', 'hostname': proxy, 'port': 8080}
+            self.tg_client.proxy = proxy_dict
+        else:
+            proxy_dict = None
+
+        self.tg_client.proxy = proxy_dict
+
+        try:
+            # Connect the client only if not already connected
             if not self.tg_client.is_connected:
                 await self.tg_client.connect()
-                logger.info(self.session_name, f"Connected to Telegram client.")
 
             peer = await self.tg_client.resolve_peer('seed_coin_bot')
 
@@ -36,14 +49,15 @@ class Tapper:
                 app=InputBotAppShortName(bot_id=peer, short_name="app"),
                 platform='android',
                 write_allowed=True,
+                start_param=actual
             ))
 
             auth_url = web_view.url
             tg_web_data = unquote(auth_url.split('tgWebAppData=')[1].split('&tgWebAppVersion')[0])
+            print(tg_web_data)
 
             return tg_web_data
-        except KeyboardInterrupt:
-            raise
+
         except Exception as e:
-            logger.error(self.session_name, "Error retrieving data.")
-            return None
+            logger.error({self.session_name}, f"Error fetching web data: {e}")
+            return ''
