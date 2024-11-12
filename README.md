@@ -1,5 +1,6 @@
-# seedcointbot
-SEEDBOT is a bot built for the SeedCoin telegram bot, designed to help users earn profits by managing virtual assets. The bot automates the buying of "worms" from the game marketplace at lower prices and sells them at a higher rate, allowing the user to accumulate profits over time.
+# SeedCoinBot
+
+SEEDBOT is a bot built for the SeedCoin Telegram bot, designed to help users earn profits by managing virtual assets. The bot automates the buying of "worms" from the game marketplace at lower prices and sells them at a higher rate, allowing the user to accumulate profits over time.
 
 ## Join Us on Telegram
 
@@ -16,12 +17,13 @@ Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMl
 
 Please proceed with caution and ensure you follow these guidelines to avoid any issues.
 
-## Watch on youtube
-[![Watch the Video](thumbnail.jpg)]([https://www.youtube.com/watch?v=Czd7MgxpSR4])
+## Watch on YouTube
+
+[![Watch the Video](https://img.youtube.com/vi/Czd7MgxpSR4/0.jpg)](https://www.youtube.com/watch?v=Czd7MgxpSR4)
 
 ## Features
 
-- Automatic worm, egg trading for profit
+- Automatic worm and egg trading for profit
 - Uses async operations to handle game requests
 - Logging and error tracking
 
@@ -51,7 +53,6 @@ The following table lists the supported egg types and their corresponding suppor
 | Legendary  | Not yet   |
 | Mythic     | Not yet   |
 
-
 ## Overview of the Script
 
 ![Image 1](image1.jpg)
@@ -59,7 +60,6 @@ The following table lists the supported egg types and their corresponding suppor
 
 ![Image 2](image2.jpg)
 *Overview Image 2*
-
 
 ## Installation
 
@@ -74,18 +74,20 @@ To set up the project on your local machine, follow these steps:
 3. **Install the dependencies**:
    ```bash
     pip install -r requirements.txt
-4. **Put your API_ID and API_HASH in config file**:
+4. **Add your API_ID and API_HASH in the config file:**
 
-How to get API_ID and API_HASH ?
-Watch on youtube
-[![How to get your telegram API ID and API HASH](https://img.youtube.com/vi/XM040Gr5h1Q/0.jpg)](https://www.youtube.com/watch?v=XM040Gr5h1Q)
+4. **Add your API_ID and API_HASH in the config file**:
 
-Visit this link: [telegram.org](https://my.telegram.org/auth)
+   - **How to get API_ID and API_HASH?** Watch this tutorial on YouTube:
+     [![How to get your Telegram API ID and API HASH](https://img.youtube.com/vi/XM040Gr5h1Q/0.jpg)](https://www.youtube.com/watch?v=XM040Gr5h1Q)
+   
+   - Visit this link to retrieve them: [telegram.org](https://my.telegram.org/auth)
+
 
 5. **Execute the following command**:
    ```bash
     python main.py
 
-6. **You have any issues?**
-      Watch  [![my tutorial]]([[https://www.youtube.com/watch?v=Czd7MgxpSR4](https://www.youtube.com/watch?v=Czd7MgxpSR4)]) on youtube explaining how to install.
-      Still have some issues? Fell free to visit my [telegram](https://t.me/+3ozlUUBMlSo2OGY0) and ask directly.
+6. **Need help?**
+   Watch my [tutorial on YouTube](https://www.youtube.com/watch?v=Czd7MgxpSR4) explaining how to install, or feel free to visit my [Telegram group](https://t.me/+3ozlUUBMlSo2OGY0) and ask for support.
+
