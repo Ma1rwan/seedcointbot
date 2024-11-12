@@ -17,7 +17,7 @@ Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMl
 Please proceed with caution and ensure you follow these guidelines to avoid any issues.
 
 ## Watch on youtube
-[![Watch the Video](thumbnail.jpg)]([https://www.youtube.com/watch?v=Czd7MgxpSR4](https://www.youtube.com/watch?v=Czd7MgxpSR4))
+[![Watch the Video](thumbnail.jpg)]([https://www.youtube.com/watch?v=Czd7MgxpSR4])
 
 ## Features
 
@@ -80,10 +80,12 @@ How to get API_ID and API_HASH ?
 Watch on youtube
 [![How to get your telegram API ID and API HASH](https://img.youtube.com/vi/XM040Gr5h1Q/0.jpg)](https://www.youtube.com/watch?v=XM040Gr5h1Q)
 
-Visit this link: [https://my.telegram.org](https://my.telegram.org/auth)
+Visit this link: [telegram.org](https://my.telegram.org/auth)
 
 5. **Execute the following command**:
    ```bash
     python main.py
 
-
+6. **You have any issues?**
+      Watch  [![my tutorial]]([[https://www.youtube.com/watch?v=Czd7MgxpSR4](https://www.youtube.com/watch?v=Czd7MgxpSR4)]) on youtube explaining how to install.
+      Still have some issues? Fell free to visit my [telegram](https://t.me/+3ozlUUBMlSo2OGY0) and ask directly.
