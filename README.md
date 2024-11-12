@@ -74,8 +74,6 @@ To set up the project on your local machine, follow these steps:
 3. **Install the dependencies**:
    ```bash
     pip install -r requirements.txt
-4. **Add your API_ID and API_HASH in the config file:**
-
 4. **Add your API_ID and API_HASH in the config file**:
 
    - **How to get API_ID and API_HASH?** Watch this tutorial on YouTube:
