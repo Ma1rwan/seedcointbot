@@ -79,6 +79,8 @@ To set up the project on your local machine, follow these steps:
 4. **Put your API_ID and API_HASH in config file**:
 
 How to get API_ID and API_HASH ?
+## Watch on youtube
+[![How to get your telegram API ID and API HASH](https://img.youtube.com/vi/XM040Gr5h1Q/0.jpg)](https://www.youtube.com/watch?v=XM040Gr5h1Q)
 
 Visit this link: [https://my.telegram.org](https://my.telegram.org/auth)
 
