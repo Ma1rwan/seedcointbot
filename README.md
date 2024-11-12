@@ -17,8 +17,7 @@ Click the link to join: [https://t.me/+3ozlUUBMlSo2OGY0](https://t.me/+3ozlUUBMl
 Please proceed with caution and ensure you follow these guidelines to avoid any issues.
 
 ## Watch on youtube
-[![How to get up to 400 SEEDS in seed coin in 1 Day](https://img.youtube.com/vi/Czd7MgxpSR4/0.jpg)](https://www.youtube.com/watch?v=Czd7MgxpSR4)
-
+[![Watch the Video]]([https://www.youtube.com/watch?v=Czd7MgxpSR4](https://www.youtube.com/watch?v=Czd7MgxpSR4))
 
 ## Features
 
