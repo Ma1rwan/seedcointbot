@@ -20,7 +20,6 @@ Please proceed with caution and ensure you follow these guidelines to avoid any 
 [![How to get up to 400 SEEDS in seed coin in 1 Day](https://img.youtube.com/vi/Czd7MgxpSR4/0.jpg)](https://www.youtube.com/watch?v=Czd7MgxpSR4)
 
 
-
 ## Features
 
 - Automatic worm, egg trading for profit
