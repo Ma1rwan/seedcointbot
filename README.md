@@ -37,7 +37,7 @@ The following table lists the supported worm types and their corresponding suppo
 | Uncommon   | Yes       |
 | Rare       | Yes       |
 | Epic       | Yes       |
-| Legendary  | Not yet   |
+| Legendary  | Yes       |
 | Mythic     | Not yet   |
 
 ## Egg Types
@@ -46,11 +46,11 @@ The following table lists the supported egg types and their corresponding suppor
 
 | Egg Type   | Support   |
 |------------|-----------|
-| Common     | Not yet   |
-| Uncommon   | Not yet   |
-| Rare       | Not yet   |
-| Epic       | Not yet   |
-| Legendary  | Not yet   |
+| Common     | Yes       |
+| Uncommon   | Yes       |
+| Rare       | Yes       |
+| Epic       | Yes       |
+| Legendary  | Yes       |
 | Mythic     | Not yet   |
 
 ## Overview of the Script
