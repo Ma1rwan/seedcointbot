@@ -1,4 +1,21 @@
 {
+  "description": "Watch how to get the api id and api hash from this video: https://www.youtube.com/watch?v=XM040Gr5h1Q",
   "API_ID": "29227885",
-  "API_HASH": "0bcd0cd111296b9aca765909cd63876d"
+  "API_HASH": "0bcd0cd111296b9aca765909cd63876d",
+
+  "description2": "Put true for each item you want to work on, in example if you dont want to buy eggs put false on all egg types",
+  "worms": {
+    "common": true,
+    "uncommon": true,
+    "rare": true,
+    "epic": true,
+    "legendary": false
+  },
+  "eggs": {
+    "common": false,
+    "uncommon": false,
+    "rare": false,
+    "epic": false,
+    "legendary": false
+  }
 }

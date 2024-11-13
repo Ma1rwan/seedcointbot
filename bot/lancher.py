@@ -16,7 +16,7 @@ def launcher():
 
     logger = Logger()
 
-    async def get_inventory(query_id):
+    async def get_inventory(query_id, inventory_type):
         """
         Retrieves the user's inventory from the SeedDAO API.
 
@@ -26,7 +26,7 @@ def launcher():
         Returns:
         dict: The JSON response from the API, or an error message if the request fails.
         """
-        url = "https://alb.seeddao.org/api/v1/worms/me"
+        url = f"https://alb.seeddao.org/api/v1/{inventory_type}/me"
         # Convert the dictionary to a JSON string
         params = {"page": 1}
         payload = json.dumps(params)
@@ -66,6 +66,7 @@ def launcher():
                 return None
 
 
+
     async def buy_worm(market_id, query_id, logger: Logger, worm_type, session_name):
         try:
             url = "https://alb.seeddao.org/api/v1/market-item/buy"
@@ -95,17 +96,58 @@ def launcher():
 
             async with aiohttp.ClientSession() as session:
                 async with session.post(url, headers=headers, data=payload) as response:
+                    json_response = await response.json()
                     if response.status == 404:
-                        return await response.json()
+                        return json_response
                     response.raise_for_status()
                     logger.success(session_name, f"{worm_type} Worm bought successfully")
 
-                    return await response.json()
+                    return json_response
         except KeyboardInterrupt:
             raise
         except aiohttp.ClientError as e:
             if "Internal Server Error" not in str(e) and "Bad Request" not in str(e):
                 logger.error(session_name, f"Error buying {worm_type} worm. {e}")
+
+            return None
+
+    async def buy_egg(market_id, query_id, logger: Logger, egg_type, session_name):
+        try:
+            url = "https://alb.seeddao.org/api/v1/market-item/buy"
+            params = {"market_id": market_id}
+            payload = json.dumps(params)
+
+            # Calculate the byte length of the JSON string
+            payload_length = len(payload.encode('utf-8'))
+            headers = {
+                "accept": "application/json, text/plain, */*",
+                "accept-encoding": "gzip, deflate, br, zstd",
+                "accept-language": "en-US,en;q=0.9",
+                "content-type": "application/json",
+                "origin": "https://cf.seeddao.org",
+                "referer": "https://cf.seeddao.org/",
+                "telegram-data": query_id,
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"
+            }
+
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, headers=headers, data=payload) as response:
+                    json_response = await response.json()
+                    if response.status == 400:
+                        return None
+                    if response.status == 404:
+                        logger.info(session_name, f"{egg_type} egg already sold.")
+                        return None
+                    if json_response.get('endpoints'):
+                        return None
+                    response.raise_for_status()
+                    logger.success(session_name, f"{egg_type} Egg bought successfully")
+                    return json_response
+        except KeyboardInterrupt:
+            raise
+        except aiohttp.ClientError as e:
+            if "Internal Server Error" not in str(e) and "Bad Request" not in str(e):
+                logger.error(session_name, f"Error buying {egg_type} egg. {e}")
 
             return None
 
@@ -155,6 +197,55 @@ def launcher():
             raise
         except aiohttp.ClientError as e:
             logger.error(session_name, f"Error during selling {worm_type} worm: {e}")
+
+            return None
+
+    async def sell_egg(worm_id, price, query_id, logger: Logger, egg_type, session_name):
+        try:
+            url = "https://alb.seeddao.org/api/v1/market-item/add"
+            price = int(price * 1000000000)
+
+            params = {
+                "egg_id": worm_id,
+                "price": price,
+            }
+            payload = json.dumps(params)
+
+            # Calculate the byte length of the JSON string
+            payload_length = len(payload.encode('utf-8'))
+
+            headers = {
+                "accept": "application/json, text/plain, */*",
+                "accept-encoding": "gzip, deflate, br, zstd",
+                "accept-language": "en-US,en;q=0.9",
+                "content-length": f"{payload_length}",  # Adjust this value to match your payload length
+                "content-type": "application/json",
+                "origin": "https://cf.seeddao.org",
+                "referer": "https://cf.seeddao.org/",
+                "sec-ch-ua": '"Chromium";v="130", "Microsoft Edge";v="130", "Not?A_Brand";v="99", "Microsoft Edge WebView2";v="130"',
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": '"Windows"',
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-site",
+                "telegram-data": query_id,
+                # Replace with your specific data
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0",
+            }
+
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, headers=headers, data=payload) as response:
+                    response.raise_for_status()
+                    if response.status == 200:
+                        logger.success(session_name, f"{egg_type} Egg sold successfully.")
+
+                        return await response.json()
+                    else:
+                        return None
+        except KeyboardInterrupt:
+            raise
+        except aiohttp.ClientError as e:
+            logger.error(session_name, f"Error during selling {egg_type} egg: {e}")
 
             return None
 
@@ -210,6 +301,57 @@ def launcher():
 
             return "skip"
 
+    async def get_egg_market(query_id: str, egg_type: str, logger: Logger, session_name):
+        try:
+            url = "https://alb.seeddao.org/api/v1/market/v2"
+            params = {
+                "market_type": "egg",
+                "egg_type": egg_type,
+                "sort_by_price": "ASC",
+                "page": 1
+            }
+
+            headers = {
+                "accept": "application/json, text/plain, */*",
+                "content-type": "application/json",
+                "origin": "https://cf.seeddao.org",
+                "telegram-data": query_id,
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0",
+            }
+
+            async with aiohttp.ClientSession() as session:
+                # Pass the params dictionary directly to the `params` argument
+                async with session.get(url, headers=headers, params=params) as response:
+                    market_data = await response.json()
+
+                    # Handle Bad Request response
+                    if response.status == 400 and market_data.get('message') != 'too many requests':
+                        logger.info(session_name, f"Bad request (400) for egg type {egg_type}. Skipping this session.")
+
+                        return "skip"
+
+                    # Raise an error if status is not OK
+                    response.raise_for_status()
+
+                    # Check if 'data' exists and is not empty
+                    if 'data' in market_data and market_data['data']:
+                        return market_data
+                    else:
+                        logger.info(session_name, f"No market data found for egg type {egg_type}. Skipping this session.")
+
+                        return "skip"
+        except KeyboardInterrupt:
+            raise
+        except aiohttp.ClientError as e:
+            if 'Bad Request' not in str(e):
+                logger.error(session_name, f"Error fetching market data for {egg_type} egg: {e}")
+
+            return "skip"
+        except asyncio.TimeoutError:
+            logger.error(session_name, f"Timeout occurred for {egg_type} egg. Skipping...")
+
+            return "skip"
+
 
     async def main():
         with open("config.json", "r") as json_file:
@@ -217,6 +359,9 @@ def launcher():
         api_id = data.get("API_ID")
         api_hash = data.get("API_HASH")
         path = r"sessions"
+        egg_types = [egg_type for egg_type, is_enabled in data["eggs"].items() if is_enabled]
+        worm_types = [worm_type for worm_type, is_enabled in data["worms"].items() if is_enabled]
+
 
         # List all files in the directory
         sessions = [os.path.splitext(f)[0] for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
@@ -226,8 +371,19 @@ def launcher():
             'common': 0.34,
             'uncommon': 0.59,
             'rare': 2.7,
-            'epic': 10.2
+            'epic': 10.2,
+            'legendary': 69
         }
+        egg_base_prices = {
+            'common': 32,
+            'uncommon': 179,
+            'rare': 784,
+            'epic': 3319,
+            'legendary': 22399
+
+        }
+
+        egg_prices = {egg_type: [egg_price, egg_price * 0.97] for egg_type, egg_price in egg_base_prices.items()}
 
         # Automatically calculate the 3% discount
         prices = {worm_type: [price, price * 0.97] for worm_type, price in base_prices.items()}
@@ -286,46 +442,87 @@ def launcher():
                         tapper = Tapper(tg_client, logger)
                         query_id = await tapper.get_tg_web_data(None)
                         # Handle each worm type for the current session
-                        for worm_type in prices:
 
+                        if worm_types:
+                            for worm_type in worm_types:
 
+                                # Fetch worm market data
+                                worm_market_data = await get_worm_market(query_id, worm_type, logger, session_name)
 
-                            # Fetch worm market data
-                            worm_market_data = await get_worm_market(query_id, worm_type, logger, session_name)
-
-                            if worm_market_data == "skip":
-                                skip_count += 1
-                                if skip_count >= 10:
-                                    skip_count = 0
-                                    session_index += 1
-                                    continue
-                            else:
-                                items = worm_market_data['data'].get('items', [])
-                                base_prices[worm_type] = (items[-1]['price_gross'] / 1000000000) * 0.99
-                                prices[worm_type] = [base_prices[worm_type], base_prices[worm_type] * 0.97]
-                                # Filter items by price and prepare buy tasks
-                                tasks = []
-                                for item in items:
-                                    if item.get('price_gross', 0) < prices[worm_type][1] * 1000000000:  # Condition to buy worm
-                                        tasks.append(buy_worm(item.get('id'), query_id, logger, worm_type, session_name))
-
-                                # If there are tasks to buy worms, execute them asynchronously
-                                if tasks:
-                                    results = await asyncio.gather(*tasks)
-                                    # Process results, sell worms after buying them
-                                    for result in results:
-                                        if result and 'data' in result:
-                                            worm_id = result['data'].get('worm_id')
-                                            worm_type = result['data'].get('worm_type')
-                                            worm_price = result['data']['price_gross'] / 1000000000
-                                            # Sell the worm after purchase
-                                            sold = await sell_worm(worm_id, prices[worm_type][0], query_id, logger, worm_type, session_name)
-                                            if sold:
-                                                profits[session_name] += (prices[worm_type][0] - worm_price - (prices[worm_type][0] * 0.03))
+                                if worm_market_data == "skip":
+                                    skip_count += 1
+                                    if skip_count >= 10:
+                                        skip_count = 0
+                                        session_index += 1
+                                        continue
                                 else:
-                                    logger.info(session_name, f"No worms meet price condition for {worm_type}.")
+                                    items = worm_market_data['data'].get('items', [])
+                                    base_prices[worm_type] = (items[-1]['price_gross'] / 1000000000) * 0.99
+                                    prices[worm_type] = [base_prices[worm_type], base_prices[worm_type] * 0.97]
+                                    # Filter items by price and prepare buy tasks
+                                    tasks = []
+                                    for item in items:
+                                        if item.get('price_gross', 0) < prices[worm_type][1] * 1000000000:  # Condition to buy worm
+                                            tasks.append(buy_worm(item.get('id'), query_id, logger, worm_type, session_name))
+
+                                    # If there are tasks to buy worms, execute them asynchronously
+                                    if tasks:
+                                        results = await asyncio.gather(*tasks)
+                                        # Process results, sell worms after buying them
+                                        for result in results:
+                                            if result and 'data' in result:
+                                                worm_id = result['data'].get('worm_id')
+                                                worm_type = result['data'].get('worm_type')
+                                                worm_price = result['data']['price_gross'] / 1000000000
+                                                # Sell the worm after purchase
+                                                sold = await sell_worm(worm_id, prices[worm_type][0], query_id, logger, worm_type, session_name)
+                                                if sold:
+                                                    profits[session_name] += (prices[worm_type][0] - worm_price - (prices[worm_type][0] * 0.03))
+                                    else:
+                                        logger.info(session_name, f"No worms meet price condition for {worm_type}.")
+                        if egg_types:
+                            for egg_type in egg_types:
+
+                                # Fetch worm market data
+                                egg_market_data = await get_egg_market(query_id, egg_type, logger, session_name)
+
+                                if egg_market_data == "skip":
+                                    skip_count += 1
+                                    if skip_count >= 10:
+                                        skip_count = 0
+                                        session_index += 1
+                                        continue
+                                else:
+                                    items = egg_market_data['data'].get('items', [])
+                                    egg_base_prices[egg_type] = (items[4]['price_gross'] / 1000000000) * 0.99
+                                    egg_prices[egg_type] = [egg_base_prices[egg_type], egg_base_prices[egg_type] * 0.97]
+                                    # Filter items by price and prepare buy tasks
+                                    tasks = []
+                                    for item in items:
+                                        if item.get('price_gross', 0) < egg_prices[egg_type][1] * 1000000000:  # <-- Condition to buy egg
+                                            tasks.append(buy_egg(item.get('id'), query_id, logger, egg_type, session_name))
+
+                                    # If there are tasks to buy eggs, execute them asynchronously
+                                    if tasks:
+                                        results = await asyncio.gather(*tasks)
+                                        # Process results, sell eggs after buying them
+                                        for result in results:
+                                            if result and 'data' in result:
+                                                egg_id = result['data'].get('egg_id')
+                                                egg_type = result['data'].get('egg_type')
+                                                egg_price = result['data']['price_gross'] / 1000000000
+                                                # Sell the egg after purchase
+                                                sold = await sell_egg(egg_id, egg_prices[egg_type][0],
+                                                                      query_id, logger, egg_type, session_name)
+                                                if sold:
+                                                    profits[session_name] += (egg_prices[egg_type][0] - egg_price -
+                                                                              (egg_prices[egg_type][0] * 0.03))
+                                    else:
+                                        logger.info(session_name, f"No eggs meet price condition for {egg_type}.")
+
 
                     loop += 1
+                    # sell all items that had errors while selling
                     if loop == 20:
                         loop = 0
                         for session_name_2 in sessions:
@@ -336,7 +533,7 @@ def launcher():
                                 query_id = await tapper.get_tg_web_data(None)
                                 max_tries = 10
                                 while True:
-                                    inventory = await get_inventory(query_id)
+                                    inventory = await get_inventory(query_id, "worms")
                                     if not inventory:
                                         max_tries -= 1
                                     else:
@@ -355,6 +552,32 @@ def launcher():
                                                 sold_count += 1
 
                                         if sold_count == 0 and inventory['data']['page'] == 1:
+                                            break
+                                    if max_tries < 1:
+                                        break
+                                max_tries = 10
+                                while True:
+                                    egg_inventory = await get_inventory(query_id, "egg")
+                                    if not egg_inventory:
+                                        max_tries -= 1
+                                    else:
+                                        items = egg_inventory['data']['items']
+                                        if len(items) == 0:
+                                            break
+                                        sold_count = 0
+                                        for item in items:
+                                            if not item['on_market']:
+                                                sold = await sell_egg(item.get('id'),
+                                                                      egg_prices[item.get('type')][0], query_id, logger,
+                                                                      egg_prices[item.get('type')], session_name)
+                                                if sold:
+                                                    profits[session_name_2] += (egg_prices[item.get('type')][0] -
+                                                                                egg_prices[item.get('type')][1] - (
+                                                                                        egg_prices[item.get('type')][
+                                                                                            0] * 0.03))
+                                                sold_count += 1
+
+                                        if sold_count == 0 and egg_inventory['data']['page'] == 1:
                                             break
                                     if max_tries < 1:
                                         break

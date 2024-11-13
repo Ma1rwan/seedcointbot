@@ -11,7 +11,7 @@ class Logger:
     def _log(self,session_name, level, message, level_color, tag_color, message_color):
         # Get the current timestamp
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
+        orange = "\033[38;5;214m"  # ANSI escape code for orange
         # Format and print the log message with colors
         if "uncommon" in message:
             message = message.replace("uncommon", f"{Fore.GREEN}uncommon{message_color}")
@@ -22,6 +22,8 @@ class Logger:
             message = message.replace("rare", f"{Fore.BLUE}rare{message_color}")
         if "epic" in message:
             message = message.replace("epic", f"{Fore.MAGENTA}epic{message_color}")
+        if "legendary" in message:
+            message = message.replace("legendary", f"{orange}legendary{message_color}")
         print(
             f"{Fore.LIGHTWHITE_EX}[{timestamp}] | {level_color}{level:<8}{Fore.LIGHTWHITE_EX} | {tag_color}{self.tag} {message_color}| {session_name} | {message}")
 
